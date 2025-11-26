@@ -98,11 +98,17 @@
             const revealedSection = document.getElementById('revealed-image-section');
 
             revealButton.addEventListener('click', () => {
-                if (revealedSection.classList.contains('hidden')) {
+                const isHidden = revealedSection.classList.contains('hidden');
+
+                if (isHidden) {
+                    // Afficher la section
                     revealedSection.classList.remove('hidden');
-                    revealButton.textContent = "Afficher l'indice";
-                    revealButton.disabled = true;
+                    revealButton.textContent = "Masquer l'indice";
                     revealedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    // Cacher la section
+                    revealedSection.classList.add('hidden');
+                    revealButton.textContent = "Afficher l'indice";
                 }
             });
         });
