@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Étape 1 - Indice de Déplacement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Définition des couleurs personnalisées */
+        :root {
+            --color-primary-bg: #050511;
+            --color-secondary-bg: #0f0e4a;
+            --color-accent-rose: #fc10ca;
+            --color-accent-bleu: #09c7df;
+            --color-text-light: #f6f2f9;
+            --color-text-main: #ffffff;
+            --color-success: #00ff9d;
+        }
+
+        body {
+            background-color: var(--color-primary-bg);
+            color: var(--color-text-light);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .title-font { font-family: 'Space Grotesk', sans-serif; }
+        .card {
+            background-color: var(--color-secondary-bg);
+            border: 2px solid var(--color-accent-bleu);
+            box-shadow: 0 0 20px rgba(9, 199, 223, 0.3);
+        }
+        .neon-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px var(--color-accent-rose), 0 0 10px var(--color-accent-rose), 0 0 20px rgba(252, 16, 202, 0.4);
+            border: 2px solid var(--color-accent-rose);
+        }
+        .neon-button:hover {
+            background-color: var(--color-accent-rose);
+            color: var(--color-primary-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px var(--color-accent-rose), 0 0 30px var(--color-accent-rose), 0 0 60px rgba(252, 16, 202, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Conteneur principal centré et responsive -->
+    <div class="w-full max-w-lg mx-auto space-y-8 mt-10">
+
+        <header class="text-center">
+            <h1 class="title-font text-3xl sm:text-4xl text-white mb-2 tracking-wider" style="color: var(--color-accent-bleu);">
+                ÉPREUVE GPS - DÉBUT DE LA PISTE
+            </h1>
+            <p class="text-xl text-white font-semibold mb-4">
+                Décodez l'image pour trouver l'emplacement du premier QR Code.
+            </p>
+        </header>
+
+        <!-- Zone de l'image initiale (plan1.png) -->
+        <main class="card p-4 rounded-xl">
+            <h2 class="text-lg font-semibold mb-3 text-center" style="color: var(--color-accent-rose);">
+                Indice : plan1.png
+            </h2>
+            <div id="image-plan-container" class="w-full bg-gray-800 rounded-lg overflow-hidden border border-gray-700 p-2">
+                <!-- Image d'indice 1. Assurez-vous que images/plan1.png existe. -->
+                <img id="image-plan" src="images/plan1.png" alt="Plan de l'indice 1" class="w-full h-auto rounded object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f0e4a/ff0055?text=ERREUR+plan1.png'; this.alt='Erreur de chargement';" >
+            </div>
+
+            <!-- Bouton cliquable pour révéler le lieu -->
+            <div class="text-center mt-6">
+                <button id="reveal-button" class="neon-button title-font text-base sm:text-xl font-bold py-3 px-8 rounded-full shadow-lg uppercase tracking-wider text-white hover:text-black">
+                    Où est le QR Code ?
+                </button>
+            </div>
+        </main>
+
+        <!-- Zone de l'image révélée (lieu1.png) - Initiallement cachée -->
+        <section id="revealed-image-section" class="card p-4 rounded-xl hidden">
+            <h2 class="text-lg font-semibold mb-3 text-center" style="color: var(--color-accent-bleu);">
+                Révélation : Lieu du QR Code (vers l'étape 2)
+            </h2>
+            <div class="w-full bg-gray-800 rounded-lg overflow-hidden border border-gray-700 p-2">
+                <!-- Image du lieu 1. Assurez-vous que images/lieu1.png existe. -->
+                <img id="image-lieu" src="images/lieu1.png" alt="Lieu physique de l'indice 2" class="w-full h-auto rounded object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f0e4a/ff0055?text=ERREUR+lieu1.png'; this.alt='Erreur de chargement';" >
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealButton = document.getElementById('reveal-button');
+            const revealedSection = document.getElementById('revealed-image-section');
+
+            revealButton.addEventListener('click', () => {
+                if (revealedSection.classList.contains('hidden')) {
+                    revealedSection.classList.remove('hidden');
+                    revealButton.textContent = "Afficher l'indice";
+                    revealButton.disabled = true;
+                    revealedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
