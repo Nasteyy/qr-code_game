@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bravo - Code Final</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Définition des couleurs personnalisées */
+        :root {
+            --color-primary-bg: #050511;
+            --color-secondary-bg: #0f0e4a;
+            --color-accent-rose: #fc10ca;
+            --color-accent-bleu: #09c7df;
+            --color-text-light: #f6f2f9;
+            --color-text-main: #ffffff;
+            --color-success: #00ff9d;
+            --color-warning: #ffbe0b;
+        }
+        body {
+            background-color: var(--color-primary-bg);
+            color: var(--color-text-light);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .title-font { font-family: 'Space Grotesk', sans-serif; }
+        .card {
+            background-color: var(--color-secondary-bg);
+            border: 2px solid var(--color-accent-bleu);
+            box-shadow: 0 0 20px rgba(9, 199, 223, 0.3);
+        }
+        .neon-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px var(--color-accent-rose), 0 0 10px var(--color-accent-rose), 0 0 20px rgba(252, 16, 202, 0.4);
+            border: 2px solid var(--color-accent-rose);
+        }
+        .neon-button:hover {
+            background-color: var(--color-accent-rose);
+            color: var(--color-primary-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px var(--color-accent-rose), 0 0 30px var(--color-accent-rose), 0 0 60px rgba(252, 16, 202, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Conteneur principal centré et responsive -->
+    <div class="w-full max-w-lg mx-auto space-y-8 mt-10">
+
+        <!-- Zone de message et du Code Final -->
+        <header class="text-center mb-6">
+            <h1 class="title-font text-3xl sm:text-4xl text-white mb-2 tracking-wider" style="color: var(--color-success);">
+                RÉUSSITE !
+            </h1>
+            <p class="text-xl text-white font-semibold mb-2">
+                Vous avez trouvé la dernière partie du code secret :
+            </p>
+            
+            <!-- Dernière Partie du Code -->
+            <div class="card p-4 rounded-xl inline-block border-2 border-dashed" style="border-color: var(--color-accent-rose);">
+                <p class="title-font text-4xl sm:text-5xl tracking-widest" style="color: var(--color-success);">
+                    1NT <!-- Code Secret 3 -->
+                </p>
+            </div>
+            
+            <!-- Instruction de Fusion -->
+            <div class="mt-8 p-4 rounded-xl" style="background-color: var(--color-warning); color: var(--color-primary-bg);">
+                <p class="title-font text-2xl font-bold tracking-wide">
+                    INSTRUCTION FINALE
+                </p>
+                <p class="text-xl mt-2 font-semibold">
+                    FUSIONNEZ les 3 codes secrets trouvés pour obtenir le code final : 
+                </p>
+                <p class="title-font text-3xl mt-2 font-bold" style="color: var(--color-secondary-bg);">
+                    PLZ S7D 1NT
+                </p>
+            </div>
+        </header>
+
+        <!-- Zone de l'image initiale (plan4.png) - Dernier Lieu/Confirmation -->
+        <main class="card p-4 rounded-xl">
+            <h2 class="text-lg font-semibold mb-3 text-center" style="color: var(--color-accent-rose);">
+                Dernier indice : plan4.png
+            </h2>
+
+            <div id="image-plan-container" class="w-full bg-gray-800 rounded-lg overflow-hidden border border-gray-700 p-2">
+                <!-- Image d'indice 4. Assurez-vous que images/plan4.png existe. -->
+                <img id="image-plan" src="images/plan4.png" alt="Plan de l'indice final" class="w-full h-auto rounded object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f0e4a/ff0055?text=ERREUR+plan4.png'; this.alt='Erreur de chargement';" >
+            </div>
+
+            <!-- Bouton cliquable pour révéler le lieu -->
+            <div class="text-center mt-6">
+                <button id="reveal-button" class="neon-button title-font text-base sm:text-xl font-bold py-3 px-8 rounded-full shadow-lg uppercase tracking-wider text-white hover:text-black">
+                    Indice du point de validation
+                </button>
+            </div>
+        </main>
+
+        <!-- Zone de l'image révélée (lieu4.png) - Initiallement cachée -->
+        <section id="revealed-image-section" class="card p-4 rounded-xl hidden">
+            <h2 class="text-lg font-semibold mb-3 text-center" style="color: var(--color-accent-bleu);">
+                Révélation : Point de validation
+            </h2>
+            <div class="w-full bg-gray-800 rounded-lg overflow-hidden border border-gray-700 p-2">
+                <!-- Image du lieu 4. Assurez-vous que images/lieu4.png existe. -->
+                <img id="image-lieu" src="images/lieu4.png" alt="Lieu physique du point de validation" class="w-full h-auto rounded object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f0e4a/ff0055?text=ERREUR+lieu4.png'; this.alt='Erreur de chargement';" >
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealButton = document.getElementById('reveal-button');
+            const revealedSection = document.getElementById('revealed-image-section');
+
+            revealButton.addEventListener('click', () => {
+                if (revealedSection.classList.contains('hidden')) {
+                    revealedSection.classList.remove('hidden');
+                    revealButton.textContent = "Afficher l'indice";
+                    revealButton.disabled = true;
+                    revealedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
