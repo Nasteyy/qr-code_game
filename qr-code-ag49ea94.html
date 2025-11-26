@@ -1,170 +1,163 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Indice — Escape Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bravo - Code Découvert</title>
+    <!-- Chargement de Tailwind CSS pour un style rapide et réactif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuration des polices Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Définition des couleurs personnalisées de votre cahier des charges */
+        :root {
+            --color-primary-bg: #050511;
+            --color-secondary-bg: #0f0e4a;
+            --color-accent-rose: #fc10ca;
+            --color-accent-bleu: #09c7df;
+            --color-text-light: #f6f2f9;
+            --color-text-main: #ffffff;
+            --color-success: #00ff9d;
+        }
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+        /* Application du fond principal à toute la page */
+        body {
+            background-color: var(--color-primary-bg);
+            color: var(--color-text-light);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 1rem;
+        }
 
-  <style>
-    :root{
-      --bg-main: #050511;
-      --bg-sec: #0f0e4a;
-      --accent-pink: #fc10ca;
-      --accent-blue: #09c7df;
-      --text: #ffffff;
-      --text-light: #f6f2f9;
-      --status-success: #00ff9d;
-      --status-error: #ff0055;
-      --status-warning: #ffbe0b;
-      --radius: 14px;
-      --maxw: 720px;
-    }
+        /* Style spécifique pour les titres */
+        .title-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
 
-    html,body{
-      height:100%;
-      margin:0;
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, var(--bg-main) 0%, #070724 40%, var(--bg-sec) 100%);
-      color: var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
+        /* Style pour les cartes/panneaux secondaires */
+        .card {
+            background-color: var(--color-secondary-bg);
+            border: 2px solid var(--color-accent-bleu);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1), 0 0 20px rgba(9, 199, 223, 0.3); /* Ombre avec l'accent bleu */
+        }
 
-    .wrap{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:32px;
-      box-sizing:border-box;
-    }
+        /* Style du bouton avec effet néon */
+        .neon-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px var(--color-accent-rose), 0 0 10px var(--color-accent-rose), 0 0 20px rgba(252, 16, 202, 0.4);
+            border: 2px solid var(--color-accent-rose);
+        }
 
-    .card{
-      width:100%;
-      max-width:var(--maxw);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border: 1px solid rgba(255,255,255,0.04);
-      border-radius:var(--radius);
-      padding:28px;
-      box-shadow: 0 8px 30px rgba(1,1,10,0.6);
-      box-sizing:border-box;
-    }
-
-    h1{
-      margin:0 0 8px 0;
-      font-family: "Space Grotesk", sans-serif;
-      font-weight:700;
-      letter-spacing: -0.02em;
-      font-size: clamp(22px, 4vw, 36px);
-      color: var(--text);
-    }
-
-    p.lead{
-      margin:0 0 18px 0;
-      color: var(--text-light);
-      font-size: 15px;
-      line-height:1.45;
-    }
-
-    .code-pill{
-      display:inline-block;
-      padding:10px 16px;
-      border-radius:10px;
-      background: linear-gradient(90deg, rgba(252,16,202,0.12), rgba(9,199,223,0.08));
-      border: 1px solid rgba(255,255,255,0.06);
-      font-family: "Space Grotesk", sans-serif;
-      font-weight:600;
-      color: var(--text);
-      font-size:18px;
-      letter-spacing:0.06em;
-    }
-
-    .meta{
-      margin-top:20px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .note{
-      background: rgba(255,255,255,0.02);
-      padding:10px 12px;
-      border-radius:10px;
-      border: 1px solid rgba(255,255,255,0.03);
-      color:var(--text-light);
-      font-size:13px;
-    }
-
-    .btn{
-      margin-left:auto;
-      background: linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
-      border:none;
-      color:var(--text);
-      padding:10px 14px;
-      font-weight:600;
-      border-radius:10px;
-      cursor:pointer;
-      box-shadow: 0 6px 18px rgba(9,199,223,0.08);
-      transition: transform .12s ease, box-shadow .12s ease;
-    }
-    .btn:active{ transform: translateY(1px) scale(.998); }
-    .btn:focus{ outline:2px solid rgba(9,199,223,0.12); }
-
-    footer{
-      margin-top:22px;
-      color: rgba(246,242,249,0.6);
-      font-size:13px;
-    }
-
-    @media (max-width:420px){
-      .card{ padding:18px; }
-      .code-pill{ font-size:16px; padding:8px 12px; }
-    }
-  </style>
+        .neon-button:hover {
+            background-color: var(--color-accent-rose);
+            color: var(--color-primary-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px var(--color-accent-rose), 0 0 30px var(--color-accent-rose), 0 0 60px rgba(252, 16, 202, 0.6);
+        }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <main class="card" role="main" aria-labelledby="title">
-      <h1 id="title">Bien joué</h1>
-      <p class="lead">Tu as trouvé l'indice. Voici le mini-code à saisir sur la page principale pour continuer :</p>
 
-      <div style="display:flex;align-items:center;gap:16px;">
-        <div class="code-pill" aria-live="polite" id="miniCode">PLZ</div>
-        <button class="btn" id="copyBtn" aria-label="Copier le code">Copier</button>
-      </div>
+    <!-- Conteneur principal centré et responsive -->
+    <div class="w-full max-w-lg mx-auto space-y-8 mt-10">
 
-      <div class="meta">
-        <div class="note">Format du code : 3 caractères (lettres ou chiffres).</div>
-        <div class="note">Scannez avec l'appareil photo : la page doit s'ouvrir sans authentification.</div>
-      </div>
+        <!-- Zone de message "Bravo" et du Code -->
+        <header class="text-center">
+            <h1 class="title-font text-3xl sm:text-4xl text-white mb-2 tracking-wider">
+                BRAVO!
+            </h1>
+            <p class="text-xl text-white font-semibold mb-4">
+                Vous avez réussi à trouver le code :
+            </p>
+            <!-- Affichage du code avec un accent visuel fort -->
+            <div class="card p-4 rounded-xl inline-block">
+                <p class="title-font text-4xl sm:text-5xl tracking-widest" style="color: var(--color-success);">
+                    PLZ
+                </p>
+            </div>
+            <p class="text-sm mt-4 text-center" style="color: var(--color-accent-bleu);">
+                C'est le code final ! Reportez-le sur la plateforme pour valider l'épreuve.
+            </p>
+        </header>
 
-      <footer>
-        Si vous êtes bloqués, retournez à la photo de départ ou utilisez l'aide du maître du jeu.
-      </footer>
-    </main>
-  </div>
+        <!-- Zone de l'image initiale (Plan 1) -->
+        <main class="card p-4 rounded-xl">
+            <h2 class="text-lg font-semibold mb-3 text-center" style="color: var(--color-accent-rose);">
+                Indice GPS : 1ère Étape
+            </h2>
 
-  <script>
-    // Copier le code dans le presse-papiers (dégrade gracieusement si impossible)
-    document.getElementById('copyBtn').addEventListener('click', async () => {
-      const code = document.getElementById('miniCode').textContent.trim();
-      try{
-        await navigator.clipboard.writeText(code);
-        document.getElementById('copyBtn').textContent = 'Copié';
-        setTimeout(()=> document.getElementById('copyBtn').textContent = 'Copier', 2000);
-      }catch(e){
-        // fallback
-        const ta = document.createElement('textarea');
-        ta.value = code;
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy'); alert('Code copié : ' + code); } catch(_){}
-        ta.remove();
-      }
-    });
-  </script>
+            <!-- Conteneur pour l'image 1 -->
+            <div id="image-plan-container" class="w-full bg-gray-800 rounded-lg overflow-hidden border border-gray-700 p-2">
+                <!-- IMPORTANT : Remplacez cet URL par le lien public de votre image plan1.png -->
+                <img id="image-plan"
+                     src="https://placehold.co/600x400/0f0e4a/f6f2f9?text=PLAN1.PNG+%0AReplacez+ce+lien"
+                     alt="Plan de l'indice 1"
+                     class="w-full h-auto rounded object-cover"
+                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f0e4a/ff0055?text=ERREUR+DE+CHARGEMENT+PLAN1.PNG';"
+                >
+            </div>
+            <p class="text-sm mt-2 text-center text-gray-400">
+                (Nom du fichier : plan1.png)
+            </p>
+
+            <!-- Bouton cliquable pour révéler l'indice suivant -->
+            <div class="text-center mt-6">
+                <button id="reveal-button"
+                        class="neon-button title-font text-base sm:text-xl font-bold py-3 px-8 rounded-full shadow-lg uppercase tracking-wider text-white hover:text-black">
+                    Où est le QR Code ? (Indice 2)
+                </button>
+            </div>
+        </main>
+
+        <!-- Zone de l'image révélée (Lieu 1) - Initiallement cachée -->
+        <section id="revealed-image-section" class="card p-4 rounded-xl hidden">
+            <h2 class="text-lg font-semibold mb-3 text-center" style="color: var(--color-accent-bleu);">
+                Révélation : Lieu du QR Code
+            </h2>
+            <!-- Conteneur pour l'image 2 -->
+            <div class="w-full bg-gray-800 rounded-lg overflow-hidden border border-gray-700 p-2">
+                <!-- IMPORTANT : Remplacez cet URL par le lien public de votre image lieu1.png -->
+                <img id="image-lieu"
+                     src="https://placehold.co/600x400/0f0e4a/f6f2f9?text=LIEU1.PNG+%0AReplacez+ce+lien"
+                     alt="Lieu physique de l'indice 2"
+                     class="w-full h-auto rounded object-cover"
+                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f0e4a/ff0055?text=ERREUR+DE+CHARGEMENT+LIEU1.PNG';"
+                >
+            </div>
+            <p class="text-sm mt-2 text-center text-gray-400">
+                (Nom du fichier : lieu1.png - Indice à chercher sur place)
+            </p>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealButton = document.getElementById('reveal-button');
+            const revealedSection = document.getElementById('revealed-image-section');
+
+            // Fonction de gestion du clic
+            revealButton.addEventListener('click', () => {
+                // Si la section est cachée, on l'affiche
+                if (revealedSection.classList.contains('hidden')) {
+                    revealedSection.classList.remove('hidden');
+                    // On change le texte du bouton une fois l'image révélée
+                    revealButton.textContent = "Indice Révélé";
+                    revealButton.disabled = true; // Désactiver après le premier clic
+                    // Défilement doux vers la nouvelle section révélée
+                    revealedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+
+            // Affichage d'un message pour remplacer les URLs des images
+            console.warn(
+                "N'oubliez pas de remplacer les URLs des placeholders 'plan1.png' et 'lieu1.png' par vos propres liens publics (Imgur, Postimages ou GitHub Pages)."
+            );
+        });
+    </script>
+
 </body>
 </html>
