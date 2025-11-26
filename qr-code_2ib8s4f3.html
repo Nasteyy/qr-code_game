@@ -72,7 +72,7 @@
         <!-- Zone de l'image initiale (plan2.png) -->
         <main class="card p-4 rounded-xl">
             <h2 class="text-lg font-semibold mb-3 text-center" style="color: var(--color-accent-rose);">
-                Indice pour l'étape 3 : plan2.png
+                Plan de l'étage : Emplacement du QR Code n°2
             </h2>
 
             <div id="image-plan-container" class="w-full bg-gray-800 rounded-lg overflow-hidden border border-gray-700 p-2">
@@ -83,7 +83,7 @@
             <!-- Bouton cliquable pour révéler le lieu -->
             <div class="text-center mt-6">
                 <button id="reveal-button" class="neon-button title-font text-base sm:text-xl font-bold py-3 px-8 rounded-full shadow-lg uppercase tracking-wider text-white hover:text-black">
-                    Où est le QR Code pour l'étape 3 ?
+                    Afficher l'indice
                 </button>
             </div>
         </main>
@@ -107,11 +107,17 @@
             const revealedSection = document.getElementById('revealed-image-section');
 
             revealButton.addEventListener('click', () => {
-                if (revealedSection.classList.contains('hidden')) {
+                const isHidden = revealedSection.classList.contains('hidden');
+
+                if (isHidden) {
+                    // Afficher la section
                     revealedSection.classList.remove('hidden');
-                    revealButton.textContent = "Afficher l'indice";
-                    revealButton.disabled = true;
+                    revealButton.textContent = "Masquer l'indice";
                     revealedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    // Cacher la section
+                    revealedSection.classList.add('hidden');
+                    revealButton.textContent = "Afficher l'indice";
                 }
             });
         });
