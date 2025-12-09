@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Étape 1 - Indice de Déplacement</title>
+    <title>Épreuve 9 - Tracage du Signal (1/3)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -49,48 +49,46 @@
 </head>
 <body>
 
-    <!-- Conteneur principal centré et responsive -->
     <div class="w-full max-w-lg mx-auto space-y-8 mt-10">
 
         <header class="text-center">
             <h1 class="title-font text-3xl sm:text-4xl text-white mb-2 tracking-wider" style="color: var(--color-accent-bleu);">
-                ÉPREUVE GPS - DÉBUT DE LA PISTE
+                ÉPREUVE 9 - TRACAGE DU SIGNAL (1/3)
             </h1>
             <p class="text-xl text-white font-semibold mb-4">
-                Rendez vous à l'emplacement en surbrillance et cherchez un papier suspect.
+                L.U.M.E.N. brouille les pistes. Tracez le signal en 3 étapes pour localiser le dispositif.
             </p>
         </header>
 
-        <!-- Zone de l'image initiale (plan1.png) -->
         <main class="card p-4 rounded-xl">
             <h2 class="text-lg font-semibold mb-3 text-center" style="color: var(--color-accent-rose);">
-                Plan de l'étage : Emplacement du QR Code n°1
+                Indice 1 : Localisation de la zone du premier QR Code
             </h2>
             <div id="image-plan-container" class="w-full bg-gray-800 rounded-lg overflow-hidden border border-gray-700 p-2">
-                <!-- Image d'indice 1. Assurez-vous que images/plan1.png existe. -->
                 <img id="image-plan" src="images/plan1.png" alt="Plan de l'indice 1" class="w-full h-auto rounded object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f0e4a/ff0055?text=ERREUR+plan1.png'; this.alt='Erreur de chargement';" >
             </div>
+            <p class="mt-3 text-sm text-center" style="color: var(--color-text-light);">
+                Rendez-vous à la zone en surbrillance pour trouver un **QR Code physique**.
+            </p>
 
-            <!-- Bouton cliquable pour révéler le lieu -->
             <div class="text-center mt-6">
                 <button id="reveal-button" class="neon-button title-font text-base sm:text-xl font-bold py-3 px-8 rounded-full shadow-lg uppercase tracking-wider text-white hover:text-black">
-                    Afficher l'indice
+                    Afficher l'indice suivant
                 </button>
             </div>
         </main>
 
-        <!-- Zone de l'image révélée (lieu1.png) - Initiallement cachée -->
         <section id="revealed-image-section" class="card p-4 rounded-xl hidden">
             <h2 class="text-lg font-semibold mb-3 text-center" style="color: var(--color-accent-bleu);">
-                Révélation : Lieu du QR Code (vers l'étape 2)
+                Indice 2 : Aperçu du Lieu du Prochain QR Code (vers l'Étape 2/3)
             </h2>
             <div class="w-full bg-gray-800 rounded-lg overflow-hidden border border-gray-700 p-2">
-                <!-- Image du lieu 1. Assurez-vous que images/lieu1.png existe. -->
-                <img id="image-lieu" src="images/lieu1.jpg" alt="Lieu physique de l'indice 2" class="w-full h-auto rounded object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f0e4a/ff0055?text=ERREUR+lieu1.png'; this.alt='Erreur de chargement';" >
+                <img id="image-lieu" src="images/lieu1.jpg" alt="Lieu physique de l'indice 2" class="w-full h-auto rounded object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f0e4a/ff0055?text=ERREUR+lieu1.jpg'; this.alt='Erreur de chargement';" >
             </div>
-            <!-- Légende sous l'image -->
-            <p class="mt-3 text-sm text-center" style="color: var(--color-text-light);">
-                Le QR Code se trouve dans la zone indiquée sur l'image.
+            <p class="mt-3 text-base font-semibold text-center" style="color: var(--color-text-light);">
+                Le **QR Code** qui vous mènera à l'étape suivante est dans la zone indiquée.
+                <br>
+                **Scannez-le pour accéder à l'Indice 2.**
             </p>
         </section>
 
@@ -112,7 +110,7 @@
                 } else {
                     // Cacher la section
                     revealedSection.classList.add('hidden');
-                    revealButton.textContent = "Afficher l'indice";
+                    revealButton.textContent = "Afficher l'indice suivant";
                 }
             });
         });
