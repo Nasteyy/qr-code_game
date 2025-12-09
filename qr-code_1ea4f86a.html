@@ -45,9 +45,70 @@
             transform: translateY(-2px);
             box-shadow: 0 0 10px var(--color-accent-rose), 0 0 30px var(--color-accent-rose), 0 0 60px rgba(252, 16, 202, 0.6);
         }
+
+        /* --- Styles pour la Pop-up Modale --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); /* Fond sombre */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: var(--color-secondary-bg);
+            border: 3px solid var(--color-accent-bleu);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 90%;
+            width: 450px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(9, 199, 223, 0.5); /* Néon bleu */
+        }
+        .modal-title {
+            color: var(--color-accent-rose);
+            margin-bottom: 1rem;
+        }
+        .modal-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px var(--color-success), 0 0 10px var(--color-success), 0 0 20px rgba(0, 255, 157, 0.4);
+            border: 2px solid var(--color-success);
+        }
+        .modal-button:hover {
+            background-color: var(--color-success);
+            color: var(--color-primary-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px var(--color-success), 0 0 30px var(--color-success), 0 0 60px rgba(0, 255, 157, 0.6);
+        }
     </style>
 </head>
 <body>
+
+    <div id="intro-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 class="title-font text-3xl font-bold modal-title">
+                🚨 AVIS DE TRACAGE DU SIGNAL 🚨
+            </h2>
+            <p class="text-lg mb-4 text-white">
+                **L.U.M.E.N. brouille les pistes.** Tracez le signal en **3 étapes** pour localiser le dispositif.
+            </p>
+            <hr class="border-gray-600 my-4">
+            <p class="text-base mb-6 text-left">
+                1. Consultez l'**Indice 1** pour trouver la zone.
+                <br>
+                2. Une fois sur place, cherchez un **QR Code physique**.
+                <br>
+                3. **Scannez le QR Code** pour accéder à la prochaine étape (`Indice 2` sur la prochaine page, etc.).
+            </p>
+            <button id="modal-close-button" class="modal-button title-font text-xl font-bold py-3 px-8 rounded-full uppercase tracking-wider text-white hover:text-black mt-4">
+                Compris, débuter la traque !
+            </button>
+        </div>
+    </div>
 
     <div class="w-full max-w-lg mx-auto space-y-8 mt-10">
 
@@ -98,7 +159,20 @@
         document.addEventListener('DOMContentLoaded', () => {
             const revealButton = document.getElementById('reveal-button');
             const revealedSection = document.getElementById('revealed-image-section');
+            const modal = document.getElementById('intro-modal');
+            const modalCloseButton = document.getElementById('modal-close-button');
 
+            // --- Logique du Pop-up ---
+            // Le pop-up est affiché par défaut (via la classe CSS)
+            
+            modalCloseButton.addEventListener('click', () => {
+                // Cacher la modale
+                modal.classList.add('hidden');
+                // S'assurer que le bouton n'est pas caché
+                revealButton.textContent = "Afficher l'indice suivant";
+            });
+
+            // --- Logique du Bouton de Révélation d'Indice ---
             revealButton.addEventListener('click', () => {
                 const isHidden = revealedSection.classList.contains('hidden');
 
